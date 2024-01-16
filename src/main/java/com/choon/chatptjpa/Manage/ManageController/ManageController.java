@@ -7,6 +7,7 @@ import com.choon.chatptjpa.Manage.ManageDTO.PTeacherDTO;
 import com.choon.chatptjpa.Manage.ManageDTO.StatusDTO;
 import com.choon.chatptjpa.Manage.ManageDTO.UserDTO;
 import com.choon.chatptjpa.Manage.ManageService.ManageService;
+import com.choon.chatptjpa.Manage.ManageVO.ImgEditRequestVO;
 import com.choon.chatptjpa.Manage.ManageVO.MemberVO;
 import com.choon.chatptjpa.Manage.ManageVO.Normal_memVO;
 import com.choon.chatptjpa.Manage.ManageVO.PTeacherVO;
@@ -132,8 +133,10 @@ public class ManageController {
    }
 
    @PostMapping({"/deleteEditItems"})
-   public ResponseEntity<List<ImgEditRequestDTO>> deleteItem(@RequestBody List<String> id) {
+   public ResponseEntity<List<ImgEditRequestDTO>> deleteItem(@RequestBody List<Long> id) {
       Iterator var2 = id.iterator();
+
+      System.out.println("안녕핫우에"+ id.toString());
 
       while(var2.hasNext()) {
          Long idx = (Long)var2.next();
@@ -143,10 +146,16 @@ public class ManageController {
       return ResponseEntity.ok().build();
    }
 
+   
    @PostMapping({"/sendJsonFile"})
-   @Transactional
    public ResponseEntity<List<ImgEditRequestDTO>> sendJson(@RequestBody List<Long> id) {
       List<ImgEditRequestDTO> s_list = this.mservice.sendJson(id);
       return ResponseEntity.ok(s_list);
    }
+   // @PostMapping("/deleteOneItem")
+   // public void deleteOneItem(@RequestBody Long id)
+   // {  
+   //    mservice.delEditImg(id);
+   // }
+ 
 }

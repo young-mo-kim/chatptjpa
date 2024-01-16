@@ -45,7 +45,17 @@ public class ManageService {
 
       while(var3.hasNext()) {
          MemberVO entity = (MemberVO)var3.next();
-         MemberDTO dto = MemberDTO.builder().id(entity.getId()).name(entity.getName()).email(entity.getEmail()).password(entity.getPassword()).role(entity.getRole()).gender(entity.getGender()).birth(entity.getBirth()).build();
+         MemberDTO dto = MemberDTO.builder()
+         .id(entity.getId())
+         .name(entity.getName())
+         .email(entity.getEmail())
+         .password(entity.getPassword())
+         .role(entity.getRole())
+         .gender(entity.getGender())
+         .birth(entity.getBirth())
+         .withKakao(entity.getWithKakao())
+         .kakaoCode(entity.getKakaoCode())
+         .build();
          dtos.add(dto);
       }
 
@@ -291,6 +301,7 @@ public class ManageService {
       return users;
    }
 
+   @Transactional
    public PTeacherVO updateTrainerStatus(Integer tnum, String status) {
       Optional<PTeacherVO> trainerOptional = this.tRepository.findById(tnum);
       if (trainerOptional.isPresent()) {
@@ -302,6 +313,7 @@ public class ManageService {
       }
    }
 
+   @Transactional
    public List<ImgEditRequestDTO> getEditImg() {
       List<ImgEditRequestVO> edit = this.imgRepository.findAll();
       List<ImgEditRequestDTO> result = new ArrayList();
@@ -314,7 +326,7 @@ public class ManageService {
          a.setImgEdit(vo.getImgEdit());
          a.setImgEditcomment(vo.getImgEditcomment());
          a.setUpPhotoId(vo.getUpPhotoId());
-         a.setEditRequestStatus(vo.isEditRequestStatus());
+         a.setEditRequestStatus(vo.getEditRequestStatus());
          a.setBeforeData(vo.getBeforeData());
          a.setAfterData(vo.getAfterData());
          result.add(a);
@@ -331,6 +343,10 @@ public class ManageService {
       this.imgRepository.delete(dno);
    }
 
+
+
+
+
    @Transactional
    public List<ImgEditRequestDTO> sendJson(List<Long> id) {
       List<ImgEditRequestDTO> alistz = new ArrayList();
@@ -341,15 +357,24 @@ public class ManageService {
          ImgEditRequestVO dio = (ImgEditRequestVO)this.imgRepository.findById(mid).orElseThrow(() -> {
             return new RuntimeException("\uc5c6\ub294\ub385?~!");
          });
+
+
+         dio.setEditRequestStatus(1);
+         
+         this.imgRepository.save(dio);
+
          ImgEditRequestDTO result = new ImgEditRequestDTO();
          result.setEditRequestId(dio.getEditRequestId());
          result.setImgEdit(dio.getImgEdit());
          result.setAfterData(dio.getAfterData());
          result.setBeforeData(dio.getBeforeData());
-         result.setEditRequestStatus(dio.isEditRequestStatus());
+         result.setEditRequestStatus(dio.getEditRequestStatus());
          result.setUpPhotoId(dio.getUpPhotoId());
          result.setImgEditcomment(dio.getImgEditcomment());
+
          alistz.add(result);
+
+         this.imgRepository.delete(dio);
       }
 
       return alistz;

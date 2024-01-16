@@ -39,7 +39,7 @@ public class ImgEditRequestVO {
     @Column(
        columnDefinition = "NUMBER(1) DEFAULT 0"
     )
-    private boolean editRequestStatus;
+    private Integer editRequestStatus;
     private String beforeData;
     private String afterData;
 }

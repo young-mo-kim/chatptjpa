@@ -49,6 +49,8 @@ public class PTeacherVO {
       referencedColumnName = "id"
    )
    private MemberVO member;
+
+
    @Column(
       length = 255
    )

@@ -17,6 +17,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import oracle.sql.BLOB;
 
 @Entity
 @Table(
@@ -26,7 +27,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class MemberVO {
+public class MemberVO 
+{
    @Id
    @Column(
       length = 255
@@ -56,4 +58,9 @@ public class MemberVO {
       length = 255
    )
    private String birth;
+
+   private String withKakao;
+
+   private String kakaoCode;
+
 }

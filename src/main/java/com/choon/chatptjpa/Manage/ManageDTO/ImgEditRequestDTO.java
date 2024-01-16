@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class ImgEditRequestDTO {
     private Long editRequestId;
     private String upPhotoId;
-    private boolean editRequestStatus;
+    private Integer editRequestStatus;
     private String imgEditcomment;
     private String imgEdit;
     private String beforeData;

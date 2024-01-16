@@ -19,5 +19,7 @@ public class MemberDTO implements Serializable {
     private String gender;
     private String role;
     private String birth;
+    private String withKakao;
+    private String kakaoCode;
 
 }
