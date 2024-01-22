@@ -40,6 +40,7 @@ public class Normal_memVO {
       allocationSize = 1
    )
    Integer nnum;
+
    @ManyToOne(
       fetch = FetchType.LAZY
    )
@@ -48,26 +49,14 @@ public class Normal_memVO {
       referencedColumnName = "id"
    )
    private MemberVO member;
-   @Column(
-      length = 255
-   )
-   String weight;
-   @Column(
-      length = 255
-   )
-   String height;
-   @Column(
-      length = 255
-   )
-   String purpose;
-   @Column(
-      length = 50
-   )
-   String activity;
-   @Column(
-      length = 255
-   )
+   double weight;
+   double height;
+   int purpose;
+   int activity;
    String nickname;
+   double target_weight;
+   String NM_PROFILEIMG;
+   String REGION;
 
    public String getMemberName() {
       return this.member != null ? this.member.getName() : null;

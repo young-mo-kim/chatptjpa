@@ -1,6 +1,8 @@
 package com.choon.chatptjpa.Manage.ManageVO;
 
 
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -17,7 +19,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import oracle.sql.BLOB;
 
 @Entity
 @Table(
@@ -57,10 +58,9 @@ public class MemberVO
    @Column(
       length = 255
    )
-   private String birth;
+   private Date birth;
 
-   private String withKakao;
-
-   private String kakaoCode;
+   private String KAKAOCODE;
+   private String WITHOAUTH;
 
 }

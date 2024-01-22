@@ -11,10 +11,13 @@ import lombok.NoArgsConstructor;
 public class Normal_memDTO {
     private Integer nnum;
     private String normal_id;
-    private String weight;
-    private String height;
-    private String purpose;
-    private String activity;
+    private double weight;
+    private double height;
+    private int purpose;
     private String nickname;
+    private int activity;
+    private double target_weight;
+    private String NM_PROFILEIMG;
+    private String REGION;
  
 }

@@ -62,7 +62,7 @@ public class ManageController {
 
    @GetMapping({"/yetList"})
    public List<PTeacherDTO> pt_applyList() {
-      String a = "\ubbf8\uc2b9\uc778";
+      int a = 0;
       return this.mservice.pt_memListByStatus(a);
    }
 

@@ -26,11 +26,11 @@ public class AuthController {
 
    @PostMapping({"/admin_login"})
    public ResponseEntity<Map<String, String>> login(@RequestBody Map<String, String> params) {
-      log.error("\ub4e4\uc5b4\uc628 \uac12 : {}", params.toString());
+      log.error("로그1번 : {}", params.toString());
       String token = this.authService.login((String)params.get("userName"), (String)params.get("password"));
       if (token == null) {
          Map<String, String> errorResponse = new HashMap();
-         errorResponse.put("error", "\ub85c\uadf8\uc778 \uc2e4\ud328");
+         errorResponse.put("error", "로그인 못했다네요~");
          return ResponseEntity.badRequest().body(errorResponse);
       } else {
          String name = "";
@@ -47,10 +47,7 @@ public class AuthController {
    public ResponseEntity<?> checkToken() {
       String authorizationHeader = this.request.getHeader("Authorization");
       String token = JwtUtil.extractToken(authorizationHeader);
-      System.out.println("\uc9c0\uae08 \uc774 \uc21c\uac04 : " + authorizationHeader);
-      System.out.println("\ub85c\ub85c\ub85c\ub864" + JwtUtil.getRole(token));
       String userRole = JwtUtil.getRole(token);
-      System.out.println("userRole : " + userRole);
       return ResponseEntity.ok().body(userRole);
    }
 

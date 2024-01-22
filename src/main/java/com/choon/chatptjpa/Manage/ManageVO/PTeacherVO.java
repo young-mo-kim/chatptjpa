@@ -37,8 +37,7 @@ public class PTeacherVO {
    @SequenceGenerator(
       name = "trainer_mem_seq",
       sequenceName = "trainer_mem_seq",
-      allocationSize = 1,
-      initialValue = 50000
+      allocationSize = 1
    )
    private Integer tnum;
    @ManyToOne(
@@ -54,20 +53,23 @@ public class PTeacherVO {
    @Column(
       length = 255
    )
-   private String trainerComment;
+   private String trainercomment;
    @Lob
-   private String trainerIntro;
-   private String address;
-   private String contactTime;
-   private String awards;
+   private String trainerintro;
+
+   private String region;
    private String awards1;
    private String awards2;
    private String awards3;
    private String awards4;
-   @Column(
-      columnDefinition = "VARCHAR(255) DEFAULT '\ubbf8\uc2b9\uc778'"
-   )
-   private String status;
+   private String awards5;
+   private String starttime;
+   private String endtime;
+   private String mainimage;
+   private String SUBIMAGE1;
+   private String SUBIMAGE2;
+   private int ISVERIFIED;   
+   private String gym;
 
    public String getMemberName() {
       return this.member != null ? this.member.getName() : null;

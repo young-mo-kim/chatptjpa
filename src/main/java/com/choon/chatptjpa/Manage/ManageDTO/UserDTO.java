@@ -18,7 +18,7 @@ public class UserDTO
     private String userid;
     private String username;
     private String usertype;
-    private String userstatus;
-    private String withKakao;
+    private int userstatus;
+    private String withOauth;
     private String kakaoCode;
 }

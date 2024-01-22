@@ -29,7 +29,7 @@ public class SecurityConfig {
    public CorsConfigurationSource corsConfigurationSource() {
       CorsConfiguration corsConfiguration = new CorsConfiguration();
       corsConfiguration.setAllowCredentials(true);
-      corsConfiguration.setAllowedOrigins(List.of("http://localhost:8080", "http://localhost:8081", "https://chunsik.shop"));
+      corsConfiguration.setAllowedOrigins(List.of("http://localhost:8080","http://localhost:3000", "http://localhost:8081", "https://chunsik.shop"));
       corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "OPTIONS", "DELETE", "OPTIONS"));
       corsConfiguration.setAllowedHeaders(List.of("*"));
       UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();

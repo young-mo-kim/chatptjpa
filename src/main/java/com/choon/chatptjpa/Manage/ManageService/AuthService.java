@@ -24,6 +24,10 @@ public class AuthService {
    }
 
    public String login(String userName, String password) {
+
+      
+
+
       MemberVO userVO = this.getUser(userName, password);
       if (userVO != null) {
          String role = userVO.getRole().toString();
@@ -33,9 +37,10 @@ public class AuthService {
       }
    }
 
-   public MemberVO getUser(String name, String password) {
+   public MemberVO getUser(String username, String password) {
       MemberVO userVO = null;
-      userVO = this.aRepository.findByNameAndPassword(name, password);
+      userVO = this.aRepository.findByIdAndPassword(username, password);
+      System.out.println(userVO.toString());
       return userVO;
    }
 

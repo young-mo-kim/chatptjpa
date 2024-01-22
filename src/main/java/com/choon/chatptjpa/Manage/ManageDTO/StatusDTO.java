@@ -8,8 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class StatusDTO {
+public class StatusDTO 
+{
     private String status;
- 
-
 }

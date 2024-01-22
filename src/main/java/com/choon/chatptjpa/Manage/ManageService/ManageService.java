@@ -53,8 +53,8 @@ public class ManageService {
          .role(entity.getRole())
          .gender(entity.getGender())
          .birth(entity.getBirth())
-         .withKakao(entity.getWithKakao())
-         .kakaoCode(entity.getKakaoCode())
+         .withOauth(entity.getWITHOAUTH())
+         .kakaoCode(entity.getKAKAOCODE())
          .build();
          dtos.add(dto);
       }
@@ -131,7 +131,24 @@ public class ManageService {
 
       while(var3.hasNext()) {
          PTeacherVO entity = (PTeacherVO)var3.next();
-         PTeacherDTO dto = PTeacherDTO.builder().trainer_id(entity.getMemberId()).trainerIntro(entity.getTrainerIntro()).trainerComment(entity.getTrainerComment()).address(entity.getAddress()).contactTime(entity.getContactTime()).awards(entity.getAwards()).awards1(entity.getAwards1()).awards2(entity.getAwards2()).awards3(entity.getAwards3()).awards4(entity.getAwards4()).status(entity.getStatus()).build();
+         PTeacherDTO dto = PTeacherDTO.builder()
+         .trainer_id(entity.getMemberId())
+         .trainerintro(entity.getTrainerintro())
+         .trainercomment(entity.getTrainercomment())
+         .region(entity.getRegion())
+         .awards1(entity.getAwards1())
+         .awards2(entity.getAwards2())
+         .awards3(entity.getAwards3())
+         .awards4(entity.getAwards4())
+         .awards5(entity.getAwards5())
+         .starttime(entity.getStarttime())
+         .endtime(entity.getEndtime())
+         .mainimage(entity.getMainimage())
+         .SUBIMAGE1(entity.getSUBIMAGE1())
+         .SUBIMAGE2(entity.getSUBIMAGE2())
+         .ISVERIFIED(entity.getISVERIFIED())
+         .gym(entity.getGym())
+         .build();
          dtos.add(dto);
       }
 
@@ -146,14 +163,31 @@ public class ManageService {
       return this.tRepository.findById(nnum);
    }
 
-   public List<PTeacherDTO> pt_memListByStatus(String status) {
-      List<PTeacherVO> filteredMemList = this.tRepository.findByStatus(status);
+   public List<PTeacherDTO> pt_memListByStatus(int ISVERIFIED) {
+      List<PTeacherVO> filteredMemList = this.tRepository.findByISVERIFIED(ISVERIFIED);
       List<PTeacherDTO> dtos = new ArrayList();
       Iterator var4 = filteredMemList.iterator();
 
       while(var4.hasNext()) {
          PTeacherVO entity = (PTeacherVO)var4.next();
-         PTeacherDTO dto = PTeacherDTO.builder().tnum(entity.getTnum()).trainer_id(entity.getMemberId()).trainerIntro(entity.getTrainerIntro()).trainerComment(entity.getTrainerComment()).address(entity.getAddress()).contactTime(entity.getContactTime()).awards(entity.getAwards()).awards1(entity.getAwards1()).awards2(entity.getAwards2()).awards3(entity.getAwards3()).awards4(entity.getAwards4()).status(entity.getStatus()).build();
+         PTeacherDTO dto = PTeacherDTO.builder()
+         .trainer_id(entity.getMemberId())
+         .trainerintro(entity.getTrainerintro())
+         .trainercomment(entity.getTrainercomment())
+         .region(entity.getRegion())
+         .awards1(entity.getAwards1())
+         .awards2(entity.getAwards2())
+         .awards3(entity.getAwards3())
+         .awards4(entity.getAwards4())
+         .awards5(entity.getAwards5())
+         .starttime(entity.getStarttime())
+         .endtime(entity.getEndtime())
+         .mainimage(entity.getMainimage())
+         .SUBIMAGE1(entity.getSUBIMAGE1())
+         .SUBIMAGE2(entity.getSUBIMAGE2())
+         .ISVERIFIED(entity.getISVERIFIED())
+         .gym(entity.getGym())
+         .build();
          dtos.add(dto);
       }
 
@@ -199,7 +233,7 @@ public class ManageService {
          userDTO.setUserid(normalUser.getMember().getId());
          userDTO.setUsername(normalUser.getMember().getName());
          userDTO.setUsertype("\ud68c\uc6d0");
-         userDTO.setUserstatus((String)null);
+         userDTO.setUserstatus(0);
          users.add(userDTO);
       }
 
@@ -214,7 +248,7 @@ public class ManageService {
          userDTO.setUserid(teacher.getMember().getId());
          userDTO.setUsername(teacher.getMember().getName());
          userDTO.setUsertype("PT\uc120\uc0dd\ub2d8");
-         userDTO.setUserstatus(teacher.getStatus());
+         userDTO.setUserstatus(teacher.getISVERIFIED());
          users.add(userDTO);
       }
 
@@ -234,7 +268,7 @@ public class ManageService {
          userDTO.setNnum((Integer)null);
          userDTO.setUsername(teacher.getMemberName());
          userDTO.setUsertype("PT\uc120\uc0dd\ub2d8");
-         userDTO.setUserstatus(teacher.getStatus());
+         userDTO.setUserstatus(teacher.getISVERIFIED());
          users.add(userDTO);
       }
 
@@ -243,7 +277,7 @@ public class ManageService {
 
    public List<UserDTO> getUnapprovedPTeachers() {
       List<UserDTO> users = new ArrayList();
-      List<PTeacherVO> unapprovedPTeachers = this.tRepository.findByStatus("\ubbf8\uc2b9\uc778");
+      List<PTeacherVO> unapprovedPTeachers = this.tRepository.findByISVERIFIED(0);
       Iterator var3 = unapprovedPTeachers.iterator();
 
       while(var3.hasNext()) {
@@ -254,7 +288,7 @@ public class ManageService {
          userDTO.setUserid(teacher.getMember().getId());
          userDTO.setUsername(teacher.getMemberName());
          userDTO.setUsertype("PT\uc120\uc0dd\ub2d8");
-         userDTO.setUserstatus(teacher.getStatus());
+         userDTO.setUserstatus(teacher.getISVERIFIED());
          users.add(userDTO);
       }
 
@@ -263,7 +297,7 @@ public class ManageService {
 
    public List<UserDTO> getapprovedPTeachers() {
       List<UserDTO> users = new ArrayList();
-      List<PTeacherVO> unapprovedPTeachers = this.tRepository.findByStatus("\uc2b9\uc778");
+      List<PTeacherVO> unapprovedPTeachers = this.tRepository.findByISVERIFIED(1);
       Iterator var3 = unapprovedPTeachers.iterator();
 
       while(var3.hasNext()) {
@@ -274,7 +308,7 @@ public class ManageService {
          userDTO.setNnum((Integer)null);
          userDTO.setUsername(teacher.getMemberName());
          userDTO.setUsertype("PT\uc120\uc0dd\ub2d8");
-         userDTO.setUserstatus(teacher.getStatus());
+         userDTO.setUserstatus(teacher.getISVERIFIED());
          users.add(userDTO);
       }
 
@@ -294,7 +328,7 @@ public class ManageService {
          userDTO.setNnum((Integer)null);
          userDTO.setUsername(teacher.getMemberName());
          userDTO.setUsertype("PT\uc120\uc0dd\ub2d8");
-         userDTO.setUserstatus(teacher.getStatus());
+         userDTO.setUserstatus(teacher.getISVERIFIED());
          users.add(userDTO);
       }
 
@@ -306,7 +340,7 @@ public class ManageService {
       Optional<PTeacherVO> trainerOptional = this.tRepository.findById(tnum);
       if (trainerOptional.isPresent()) {
          PTeacherVO trainer = (PTeacherVO)trainerOptional.get();
-         trainer.setStatus(status);
+         trainer.setISVERIFIED(0);
          return (PTeacherVO)this.tRepository.save(trainer);
       } else {
          return null;

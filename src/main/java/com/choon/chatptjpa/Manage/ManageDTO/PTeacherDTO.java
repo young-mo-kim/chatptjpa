@@ -13,15 +13,19 @@ import lombok.NoArgsConstructor;
 public class PTeacherDTO implements Serializable {
     private Integer tnum;
     private String trainer_id;
-    private String trainerComment;
-    private String trainerIntro;
-    private String address;
-    private String contactTime;
-    private String awards;
+    private String trainercomment;
+    private String trainerintro;
+    private String region;
     private String awards1;
     private String awards2;
     private String awards3;
     private String awards4;
-    private String status;
- 
+    private String awards5;
+    private String starttime;
+    private String endtime;
+    private String mainimage;
+    private String SUBIMAGE1;
+    private String SUBIMAGE2;
+    private int ISVERIFIED;   
+    private String gym;
 }
