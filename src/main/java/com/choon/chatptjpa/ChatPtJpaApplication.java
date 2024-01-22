@@ -23,7 +23,16 @@ public class ChatPtJpaApplication {
 			public void addCorsMappings(CorsRegistry registry) {
 				System.out.println("Test==================");
 				registry.addMapping("/**")
-						.allowedOrigins("http://localhost:8080/", "http://localhost:8081/","http://localhost:3000/", "https://chunsik.shop","http://localhost:9000/", "http://localhost/", "ws://localhost")
+						.allowedOrigins("http://localhost:8080/"
+						, "http://localhost:8081/"
+						,"http://localhost:3000/"
+						, "https://chunsik.shop"
+						,"http://localhost:9000/"
+						, "http://localhost/"
+						,"http://www.chatpt.shop/"
+						, "http://chatpt.shop/"
+						, "http://chatpt.shop:8888/"
+						, "http://www.chatpt.shop:8888/" )
 						.allowedHeaders("*")
 						.allowedMethods("*").allowCredentials(true).maxAge(3600);
 
