@@ -43,7 +43,7 @@ public class ManageService {
    }
 
    public List<MemberDTO> getMemberList() {
-      List<MemberVO> listvo = this.memberRepository.findAll();
+      List<MemberVO> listvo = this.memberRepository.findMembersExcludingPattern("DUMMY");
       List<MemberDTO> dtos = new ArrayList();
       Iterator var3 = listvo.iterator();
 
@@ -79,7 +79,7 @@ public class ManageService {
    }
 
    public List<Normal_memDTO> nor_memList() {
-      List<Normal_memVO> normalMemList = this.mRepository.findAll();
+      List<Normal_memVO> normalMemList = this.mRepository.findmembers("DUMMY");
       List<Normal_memDTO> dtos = new ArrayList();
       Iterator var3 = normalMemList.iterator();
 
@@ -209,27 +209,45 @@ public class ManageService {
       this.memberRepository.delete(member);
    }
 
-   public List<UserDTO> getUserDetails(String id) {
-      List<UserDTO> users = this.getAllUsersWithDetails();
-      List<UserDTO> findUser = new ArrayList();
-      Iterator var4 = users.iterator();
+   public UserDTO getUserDetails(String id) 
+   {
 
-      while(var4.hasNext()) 
+      MemberVO mvo = memberRepository.findById(id).orElseThrow(()->new RuntimeException("찾지 못함"));
+      
+      UserDTO user = new UserDTO();
+      if(mvo.getRole().equals("NORMAL"))
       {
-         UserDTO auser = (UserDTO)var4.next();
-         if (auser.getUserid().equals(id)) 
-         {
-            findUser.add(auser);
-            break;
-         }
+         Normal_memVO nvo = mRepository.findByMember(mvo.getId());
+         user.setNnum(nvo.getNnum());
+         user.setUsername(nvo.getMemberName());
+         user.setUserid(mvo.getId());
+         user.setUsertype(mvo.getRole());
+         user.setUserimg(nvo.getNM_PROFILEIMG());
+         user.setUserstatus(0);
       }
+      else if(mvo.getRole().equals("TRAINER"))
+      {
+         PTeacherVO pvo = tRepository.findByMember(mvo.getId());
+         user.setUserid(mvo.getId());
+         user.setTnum(pvo.getTnum());
+         user.setUsername(pvo.getMemberName());
+         user.setUsertype(mvo.getRole());
+         user.setTimg(pvo.getMainimage());
+         user.setUserstatus(pvo.getISVERIFIED());
+         user.setKakaoCode(mvo.getKAKAOCODE());
+         user.setWithOauth(mvo.getWITHOAUTH());
 
-      return findUser;
+         user.setNnum(null);
+         user.setUserimg(null);
+      }
+      
+
+      return user;
    }
 
    public List<UserDTO> getAllUsersWithDetails() {
       List<UserDTO> users = new ArrayList();
-      List<Normal_memVO> normalUsers = this.mRepository.findAll();
+      List<Normal_memVO> normalUsers = this.mRepository.findmembers("DUMMY");
       Iterator var3 = normalUsers.iterator();
 
       while(var3.hasNext()) {

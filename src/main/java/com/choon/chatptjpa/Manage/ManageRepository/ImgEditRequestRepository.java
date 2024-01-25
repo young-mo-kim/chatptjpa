@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import com.choon.chatptjpa.Manage.ManageVO.ImgEditRequestVO;
 import com.choon.chatptjpa.Manage.ManageVO.UpphotoVO;
 
-
 public interface ImgEditRequestRepository extends JpaRepository<ImgEditRequestVO, Long> 
 {
     @Query("SELECT i.upphotoid FROM ImgEditRequestVO i WHERE i.edit_request_id = :editRequestId")

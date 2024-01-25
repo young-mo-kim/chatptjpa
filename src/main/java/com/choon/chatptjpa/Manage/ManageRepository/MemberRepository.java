@@ -23,5 +23,13 @@ public interface MemberRepository extends JpaRepository<MemberVO, String>
     @Query("SELECT m.name FROM MemberVO m WHERE m.id = :id")
     String getName(@Param("id") String id);
 
-    Page<MemberVO> findAll(Pageable pageable);
+
+    @Query("SELECT m FROM MemberVO m WHERE m.id NOT LIKE %:pattern%")
+    List<MemberVO> findMembersExcludingPattern(@Param("pattern") String pattern);
+
+
+    
+
+
+
  }

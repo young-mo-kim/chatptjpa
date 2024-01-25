@@ -121,8 +121,9 @@ public class ManageController {
    }
 
    @GetMapping({"/MembersDetails/{id}"})
-   public ResponseEntity<List<UserDTO>> getMemberDetailById(@PathVariable("id") String id) {
-      List<UserDTO> users = this.mservice.getUserDetails(id);
+   public ResponseEntity<UserDTO> getMemberDetailById(@PathVariable("id") String id) {
+      UserDTO users = this.mservice.getUserDetails(id);
+      System.out.println(users);
       return users != null ? ResponseEntity.ok(users) : ResponseEntity.notFound().build();
    }
 

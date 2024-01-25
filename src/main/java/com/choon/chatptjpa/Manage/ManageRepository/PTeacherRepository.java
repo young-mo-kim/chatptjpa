@@ -13,5 +13,8 @@ public interface PTeacherRepository extends JpaRepository<PTeacherVO, Integer> {
     List<PTeacherVO> findByMemberId(@Param("memberId") String memberId);
  
     List<PTeacherVO> findByISVERIFIED(int iSVERIFIED);
- }
+
+    @Query("SELECT pt FROM PTeacherVO pt WHERE pt.member.id = :id")
+    PTeacherVO findByMember(@Param("id") String id);
+}
  
