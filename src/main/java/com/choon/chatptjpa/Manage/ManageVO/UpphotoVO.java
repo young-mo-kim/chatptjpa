@@ -18,6 +18,8 @@ import lombok.NoArgsConstructor;
 public class UpphotoVO 
 {
     @Id
+
+    
     @GeneratedValue(
        strategy = GenerationType.SEQUENCE,
        generator = "UPPHOTO_SEQ"
