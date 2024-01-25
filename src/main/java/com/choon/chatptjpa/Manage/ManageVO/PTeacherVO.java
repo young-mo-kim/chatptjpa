@@ -22,8 +22,7 @@ import lombok.NoArgsConstructor;
    name = "trainer_mem",
    uniqueConstraints = {@UniqueConstraint(
    columnNames = {"tnum", "trainerId"}
-)}
-)
+)})
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

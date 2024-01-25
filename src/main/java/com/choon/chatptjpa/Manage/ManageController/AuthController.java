@@ -26,11 +26,9 @@ public class AuthController {
 
    @PostMapping({"/admin_login"})
    public ResponseEntity<Map<String, String>> login(@RequestBody Map<String, String> params) {
-      log.error("로그1번 : {}", params.toString());
       String token = this.authService.login((String)params.get("userName"), (String)params.get("password"));
       if (token == null) {
          Map<String, String> errorResponse = new HashMap();
-         errorResponse.put("error", "로그인 못했다네요~");
          return ResponseEntity.badRequest().body(errorResponse);
       } else {
          String name = "";
