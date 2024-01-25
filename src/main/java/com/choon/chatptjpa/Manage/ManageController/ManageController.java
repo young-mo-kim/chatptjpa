@@ -2,6 +2,7 @@
 package com.choon.chatptjpa.Manage.ManageController;
 
 import com.choon.chatptjpa.Manage.ManageDTO.ImgEditRequestDTO;
+import com.choon.chatptjpa.Manage.ManageDTO.MemberDTO;
 import com.choon.chatptjpa.Manage.ManageDTO.Normal_memDTO;
 import com.choon.chatptjpa.Manage.ManageDTO.PTeacherDTO;
 import com.choon.chatptjpa.Manage.ManageDTO.StatusDTO;
@@ -16,6 +17,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,6 +29,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -42,6 +48,18 @@ public class ManageController {
    public List<Normal_memDTO> normal_list() {
       return this.mservice.nor_memList();
    }
+
+
+   // @GetMapping("/members")
+   // public Page<MemberDTO> listMembers(@RequestParam(defaultValue = "0") int page,
+   //                                     @RequestParam(defaultValue = "10") int size,
+   //                                     @RequestParam(defaultValue = "id,asc") String[] sort) 
+   // {
+   //      Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
+   //      return mservice.nor_memList(pageable);
+   // }
+
+
 
    @DeleteMapping({"/nordel/{nnum}"})
    public ResponseEntity<?> delete_user(@PathVariable Integer nnum) {
@@ -136,8 +154,6 @@ public class ManageController {
    public ResponseEntity<List<ImgEditRequestDTO>> deleteItem(@RequestBody List<Long> id) {
       Iterator var2 = id.iterator();
 
-      System.out.println("안녕핫우에"+ id.toString());
-
       while(var2.hasNext()) {
          Long idx = (Long)var2.next();
          this.mservice.delEditImg(idx);
@@ -158,4 +174,9 @@ public class ManageController {
    //    mservice.delEditImg(id);
    // }
  
+
+
+
+
+
 }

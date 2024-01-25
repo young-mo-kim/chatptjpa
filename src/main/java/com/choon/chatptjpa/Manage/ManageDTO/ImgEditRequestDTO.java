@@ -11,10 +11,12 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ImgEditRequestDTO {
     private Long editRequestId;
-    private String upPhotoId;
+    private int nnum;
+    private Long upphotoid;
     private Integer editRequestStatus;
     private String imgEditcomment;
     private String imgEdit;
     private String beforeData;
     private String afterData;
+    private int foodnum;
 }

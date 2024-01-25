@@ -20,7 +20,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import java.util.stream.Collectors;
 
 @Service
 public class ManageService {
@@ -210,10 +214,13 @@ public class ManageService {
       List<UserDTO> findUser = new ArrayList();
       Iterator var4 = users.iterator();
 
-      while(var4.hasNext()) {
+      while(var4.hasNext()) 
+      {
          UserDTO auser = (UserDTO)var4.next();
-         if (auser.getUserid().equals(id)) {
+         if (auser.getUserid().equals(id)) 
+         {
             findUser.add(auser);
+            break;
          }
       }
 
@@ -255,7 +262,8 @@ public class ManageService {
       return users;
    }
 
-   public List<UserDTO> AllPTeachers() {
+   public List<UserDTO> AllPTeachers() 
+   {
       List<UserDTO> users = new ArrayList();
       List<PTeacherVO> allT = this.tRepository.findAll();
       Iterator var3 = allT.iterator();
@@ -336,11 +344,12 @@ public class ManageService {
    }
 
    @Transactional
-   public PTeacherVO updateTrainerStatus(Integer tnum, String status) {
+   public PTeacherVO updateTrainerStatus(Integer tnum, int status) 
+   {
       Optional<PTeacherVO> trainerOptional = this.tRepository.findById(tnum);
       if (trainerOptional.isPresent()) {
          PTeacherVO trainer = (PTeacherVO)trainerOptional.get();
-         trainer.setISVERIFIED(0);
+         trainer.setISVERIFIED(status);
          return (PTeacherVO)this.tRepository.save(trainer);
       } else {
          return null;
@@ -353,16 +362,23 @@ public class ManageService {
       List<ImgEditRequestDTO> result = new ArrayList();
       Iterator var3 = edit.iterator();
 
-      while(var3.hasNext()) {
+      while(var3.hasNext()) 
+      {
          ImgEditRequestVO vo = (ImgEditRequestVO)var3.next();
+
+         
+         
+
          ImgEditRequestDTO a = new ImgEditRequestDTO();
-         a.setEditRequestId(vo.getEditRequestId());
-         a.setImgEdit(vo.getImgEdit());
-         a.setImgEditcomment(vo.getImgEditcomment());
-         a.setUpPhotoId(vo.getUpPhotoId());
-         a.setEditRequestStatus(vo.getEditRequestStatus());
-         a.setBeforeData(vo.getBeforeData());
-         a.setAfterData(vo.getAfterData());
+         a.setEditRequestId(vo.getEdit_request_id());
+         a.setImgEdit(vo.getImg_edit());
+         a.setImgEditcomment(vo.getImg_editcomment());
+         a.setUpphotoid(vo.getUpphotoId());
+         a.setNnum(vo.getnnum());
+         a.setEditRequestStatus(vo.getEdit_request_status());
+         a.setBeforeData(vo.getBefore_data());
+         a.setAfterData(vo.getAfter_data());
+         a.setFoodnum(vo.getFoodNum());
          result.add(a);
       }
 
@@ -393,18 +409,20 @@ public class ManageService {
          });
 
 
-         dio.setEditRequestStatus(1);
+         dio.setEdit_request_status(1);
          
          this.imgRepository.save(dio);
 
          ImgEditRequestDTO result = new ImgEditRequestDTO();
-         result.setEditRequestId(dio.getEditRequestId());
-         result.setImgEdit(dio.getImgEdit());
-         result.setAfterData(dio.getAfterData());
-         result.setBeforeData(dio.getBeforeData());
-         result.setEditRequestStatus(dio.getEditRequestStatus());
-         result.setUpPhotoId(dio.getUpPhotoId());
-         result.setImgEditcomment(dio.getImgEditcomment());
+         result.setEditRequestId(dio.getEdit_request_id());
+         result.setImgEdit(dio.getImg_edit());
+         result.setImgEditcomment(dio.getImg_editcomment());
+         result.setUpphotoid(dio.getUpphotoId());
+         result.setNnum(dio.getnnum());
+         result.setEditRequestStatus(dio.getEdit_request_status());
+         result.setBeforeData(dio.getBefore_data());
+         result.setAfterData(dio.getAfter_data());
+         result.setFoodnum(dio.getFoodNum());
 
          alistz.add(result);
 
@@ -413,6 +431,23 @@ public class ManageService {
 
       return alistz;
    }
+
+
+
+public Page<MemberDTO> getMemberList(Pageable pageable) {
+    Page<MemberVO> page = this.memberRepository.findAll(pageable);
+    List<MemberDTO> dtos = page.getContent().stream().map(entity -> {
+        return MemberDTO.builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                // ... 다른 필드들
+                .build();
+    }).collect(Collectors.toList());
+    return new PageImpl<>(dtos, pageable, page.getTotalElements());
+}
+
+
+
 
    public String getRole(String userName) {
       return this.memberRepository.getRole(userName);
@@ -432,4 +467,9 @@ public class ManageService {
       this.tRepository = tRepository;
       this.imgRepository = imgRepository;
    }
+
+
+
+
+
 }

@@ -41,22 +41,20 @@ public class Normal_memVO {
    )
    Integer nnum;
 
-   @ManyToOne(
-      fetch = FetchType.LAZY
-   )
+   @ManyToOne()
    @JoinColumn(
       name = "normalId",
       referencedColumnName = "id"
    )
    private MemberVO member;
-   double weight;
-   double height;
-   int purpose;
-   int activity;
-   String nickname;
-   double target_weight;
-   String NM_PROFILEIMG;
-   String REGION;
+   private double weight;
+   private double height;
+   private int purpose;
+   private int activity;
+   private String nickname;
+   private double target_weight;
+   private String NM_PROFILEIMG;
+   private String REGION;
 
    public String getMemberName() {
       return this.member != null ? this.member.getName() : null;

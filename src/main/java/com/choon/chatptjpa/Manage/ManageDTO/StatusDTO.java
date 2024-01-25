@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 @Builder
 public class StatusDTO 
 {
-    private String status;
+    private int status;
 }
