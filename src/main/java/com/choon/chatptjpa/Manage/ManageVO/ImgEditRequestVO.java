@@ -63,4 +63,8 @@ public class ImgEditRequestVO {
     {
       return upphotoid.getUpphotoid();
     }
+    public int getnnum()
+    {
+      return upphotoid.getNnum();
+    }
 }

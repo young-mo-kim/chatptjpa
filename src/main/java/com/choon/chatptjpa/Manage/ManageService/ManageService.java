@@ -374,6 +374,7 @@ public class ManageService {
          a.setImgEdit(vo.getImg_edit());
          a.setImgEditcomment(vo.getImg_editcomment());
          a.setUpphotoid(vo.getUpphotoId());
+         a.setNnum(vo.getnnum());
          a.setEditRequestStatus(vo.getEdit_request_status());
          a.setBeforeData(vo.getBefore_data());
          a.setAfterData(vo.getAfter_data());
@@ -417,6 +418,7 @@ public class ManageService {
          result.setImgEdit(dio.getImg_edit());
          result.setImgEditcomment(dio.getImg_editcomment());
          result.setUpphotoid(dio.getUpphotoId());
+         result.setNnum(dio.getnnum());
          result.setEditRequestStatus(dio.getEdit_request_status());
          result.setBeforeData(dio.getBefore_data());
          result.setAfterData(dio.getAfter_data());

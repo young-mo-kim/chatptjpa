@@ -154,8 +154,6 @@ public class ManageController {
    public ResponseEntity<List<ImgEditRequestDTO>> deleteItem(@RequestBody List<Long> id) {
       Iterator var2 = id.iterator();
 
-      System.out.println("안녕핫우에"+ id.toString());
-
       while(var2.hasNext()) {
          Long idx = (Long)var2.next();
          this.mservice.delEditImg(idx);
